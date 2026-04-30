@@ -1,0 +1,4 @@
+BloodSugar,BP,CKMB,Troponin,Risk
+200,150,30,0.5,High
+160,135,20,0.2,Medium
+110,120,10,0.01,Low
