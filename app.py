@@ -1,26 +1,23 @@
 from flask import Flask, request, jsonify
+from model import predict_risk
 
 app = Flask(__name__)
 
-def predict_risk(marks, attendance):
-    if marks > 75 and attendance > 75:
-        return "Low Risk"
-    elif marks > 50:
-        return "Medium Risk"
-    else:
-        return "High Risk"
-
 @app.route('/')
 def home():
-    return "Student Risk Prediction System"
+    return "Cardiac Arrest Risk Prediction System"
 
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json()
-    marks = data.get('marks')
-    attendance = data.get('attendance')
 
-    result = predict_risk(marks, attendance)
+    blood_sugar = data.get('blood_sugar')
+    bp = data.get('bp')
+    ckmb = data.get('ckmb')
+    troponin = data.get('troponin')
+
+    result = predict_risk(blood_sugar, bp, ckmb, troponin)
+
     return jsonify({"Risk Level": result})
 
 if __name__ == '__main__':
